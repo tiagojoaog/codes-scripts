@@ -1,0 +1,21 @@
+Planetary motion initiated.
+-- Press q to terminate
+
+Years: 24.00  dt(days): 0.050000
+Terminated by pressing q.
+
+ Runtime: 0:6:26
+Planetary motion initiated.
+-- Press q to terminate
+
+Years: 24.00  dt(days): 0.050000
+Terminated by pressing q.
+
+ Runtime: 0:8:50
+Planetary motion initiated.
+-- Press q to terminate
+
+Years: 24.00  dt(days): 0.050000
+Terminated by pressing q.
+
+ Runtime: 0:15:21

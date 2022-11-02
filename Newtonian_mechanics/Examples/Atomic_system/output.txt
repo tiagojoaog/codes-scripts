@@ -1,0 +1,10 @@
+Planetary motion initiated.
+-- Press q to terminate
+
+Years: 0.01  dt(days): 0.001000
+Terminated by pressing q.
+q
+ Runtime: 0:0:18
+
+#NOTE: Time passed is not actually years and dt is not days
+#      Read input comments in Atomic_system.py for more information.

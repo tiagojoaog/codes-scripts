@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+
+#export pythonpath guis to be able to use the module below
+from fancy_plots import fancy_plots_gui
+
+fancy_plots_gui.run()

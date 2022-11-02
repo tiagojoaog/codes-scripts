@@ -12,7 +12,7 @@ setup(
     version='0.1',
     packages=find_packages(),
     include_package_data=True,
-    license='GPL License',  # example license. Placeholder for actual license.
+    license='GPL License', 
     description='Newtonian Mechanics for Orbital Motion',
     long_description=README,
     url='',

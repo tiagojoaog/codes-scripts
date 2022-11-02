@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+
+import sys
+from ase.io import read
+from ase.thermochemistry import HarmonicThermo,IdealGasThermo
+import os
+
+keyword=''
+for trial in sys.argv:
+	keyword+=trial+' '
+		
+os.system("vasp_get_free_energy.py "+keyword+">free_energy.log")
+
+f=open("dg_ase.log","r")
+dg_ase=float(f.read())
+f.close()
+g=open("free_energy.log","r")
+
+print("dg_ase.log corresponds to dG+ZPVE")
+print("ideal_gas_free_energy.e/harmonic_free_energy.e corresponds to dG without ZPVE")
+print("free_energy.log has all the info")
+print("gibbs_freq_used.txt has the info on the frequencies considered, and which values")
+
+for line in g.readlines():
+        line=line.split()
+        if "E_ZPE" in line:
+                ZPE=line[1]
+if "gas" in keyword.split(" "):
+        h=open("ideal_gas_free_energy.e","w")
+        #print ZPE,dg_ase
+        h.write(str(float(dg_ase)-float(ZPE)))
+        h.close()	
+else:
+        h=open("harmonic_free_energy.e","w")
+        #print ZPE,dg_ase
+        h.write(str(float(dg_ase)-float(ZPE)))
+        h.close()

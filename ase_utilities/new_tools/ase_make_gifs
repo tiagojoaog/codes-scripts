@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+
+from ase.io import read, write
+import os, sys
+
+try:
+  import imageio
+except ModuleNotFoundError:
+  raise ModuleNotFoundError('Please import imageio with the following command \'module load Python/Imageio/3/Imageio-2.16.2\'.')
+
+def return_args(args):
+    string=''
+    for name,value in args.items():
+        string+=f'{name}={value} '
+    return string
+
+args = {'name':'relax.traj', 'angle':'-90','direction':'x',
+        'savename':'movie.gif','interval':1}
+#Default arguments.
+for index,argument in enumerate(sys.argv):
+    arg = argument.split('=')
+    if arg[0] in args:
+      args[arg[0]] = arg[1]
+    elif index==0:  #First argument is always the script execution name, keywords come afterwards.
+      pass    
+    else:
+        print(f"Keyword '{argument}' not recognized. Use e.g. ase_make_gif {return_args(args)}")
+        sys.exit(1)
+
+images = read(args['name'],index=':')
+interval = int(args['interval'])
+print(f'Total number of images: {len(images)}. Converting to PNG format...')
+for i, image in enumerate(images):
+  if (i+1) % interval == 0:
+    image.rotate(float(args['angle']), args['direction'], center=(0, 0, 0), rotate_cell=True)
+    write('image_'+str(i)+'.png',image,scale=1800, maxwidth=1800)
+
+here = os.getcwd()
+
+print(f'Conversion done. Merging...')
+all_filenames = os.listdir(here)
+filenames = []
+for names in all_filenames:
+  if names.split('_')[0] == 'image' and names.split('.')[1]=='png':
+    filenames.append(names)      
+with imageio.get_writer(f"{here}/{args['savename']}", mode='I') as writer:
+  for filename in filenames:
+    image = imageio.imread(filename)
+    writer.append_data(image)
+print(f'{len(filenames)} images were accounted for the GIF.')
+for i in filenames:
+  os.system(f'rm {i}')
+print('Done.')

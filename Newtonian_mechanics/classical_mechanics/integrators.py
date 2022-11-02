@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from vpython import *
+from vpython import * #vector, scene, sphere come from here. Wildcard can be removed and replaced with these.
 from matplotlib import pyplot as plt
 import numpy as np
 import sys,os

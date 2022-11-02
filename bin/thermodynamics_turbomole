@@ -1,0 +1,29 @@
+#! /usr/bin/env python
+import numpy as np
+import os
+import os.path
+import sys
+
+keyword=''
+for trial in sys.argv:
+  if "temperature"==trial.split("=")[0]:
+    tstart=str(trial.split("=")[1])
+    tend=str(trial.split("=")[1])
+    numt=str(1)
+  elif "tstart"==trial.split("=")[0]:
+    tstart=trial.split("=")[1]
+  elif "tend"==trial.split("=")[0]:
+    tend=str(trial.split("=")[1])
+  elif "steps"==trial.split("=")[0]:
+    numt=str(trial.split("=")[1])
+f=open("freeh_input","w")
+f.writelines("\n")
+f.writelines("\n")
+try:
+	float(tstart)
+	f.writelines("tstart="+str(tstart)+" tend="+str(tend)+" numt="+str(numt)+"\n")
+except ValueError:
+	f.writelines("\n")
+f.writelines("*")
+f.close()
+os.system("freeh <freeh_input>free_energy_calcs.log")

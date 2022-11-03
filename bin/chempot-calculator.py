@@ -539,7 +539,10 @@ data.call_var(molecule)
 
 
 temp        = input("Temperature (K) : ")
+
 temperature = eval_var('Temperature',temp,[200,300,400])
+
+
 
 
 press    = input("Pressure (bar)  : ")
@@ -549,6 +552,9 @@ ZPVE     = data.ZPVE
 print("\nG    = ZPVE + \u0394\u03BC(0 \u2192 T)\n\nZPVE =","{:.3f}".format(round(ZPVE,3))," eV \n")
 
 for i in temperature:
+  if i < 1:
+    raise ValueError("Temperature is smaller than 1 K.")
+
   for j in pressure:
     for val in data.interpolation:
       temprange1=float(val.split('_')[1].split('-')[0])

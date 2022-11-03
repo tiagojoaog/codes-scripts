@@ -494,7 +494,7 @@ def eval_var(string,var,example_list):
   try:
     variable = [float(i) for i in var.split(',')]
     return variable
-  except:
+  except ValueError:
     error_not_recognized(string,var,example_list)
 
 print("\n\n")
@@ -507,6 +507,8 @@ print("#              Rotator/Translator and Harmonic                       #")
 print("#              Oscillator approximation                              #")
 print("#                                                                    #")
 print("#              Reliable for temperatures below 1100K                 #")
+print("#                                                                    #")
+print("#              Temperatures below 1 K are not supported              #")
 print("#                                                                    #")
 print("######################################################################")
 print("\n")
@@ -547,7 +549,6 @@ ZPVE     = data.ZPVE
 print("\nG    = ZPVE + \u0394\u03BC(0 \u2192 T)\n\nZPVE =","{:.3f}".format(round(ZPVE,3))," eV \n")
 
 for i in temperature:
-  j=40
   for j in pressure:
     for val in data.interpolation:
       temprange1=float(val.split('_')[1].split('-')[0])

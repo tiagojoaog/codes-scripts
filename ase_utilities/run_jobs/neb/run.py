@@ -92,7 +92,7 @@ if not POSCAR:
 
   images.append(final)
 
-  neb = NEB(images,climb=False,k=0.1)
+  neb = NEB(images,climb=True,k=0.1)
   if idpp:
     neb.interpolate(idpp)
   else:

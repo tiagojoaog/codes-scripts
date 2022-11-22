@@ -81,7 +81,7 @@ class slab(): # My Slab definition to generate surfaces with different terminati
         self.frozen_layers  = frozen_layers
         self.cell_matrix    = self.bulk.get_cell()
         if cubic_check:
-            self.check_conventional()       
+            self.check_cubic()       
         slab_init=ase.build.surface(self.bulk, self.miller,1,periodic=True)
         make_slab=ase.build.surface(self.bulk, self.miller,self.layers,vacuum=self.vacuum/2,periodic=True)
         make_extra_layer=ase.build.surface(self.bulk, self.miller,self.layers+1,vacuum=self.vacuum/2,periodic=True)
@@ -152,7 +152,7 @@ class slab(): # My Slab definition to generate surfaces with different terminati
         c=FixAtoms(indices=full_frozen)
         slab.set_constraint(c)
 
-    def check_conventional(self):
+    def check_cubic(self):
         a=self.cell_matrix[0]
         b=self.cell_matrix[1]
         c=self.cell_matrix[2]

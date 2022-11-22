@@ -381,15 +381,13 @@ class Weather():
         tk.Label(self.win["weather"], text="").grid(row=41,column=0,columnspan=20)
         tk.Label(self.win["weather"], text=self.message, fg=text_color).grid(row=42,column=0,columnspan=20)
 
-def main(_dict):
+def main():
     
     WeatherObj = Weather()
-
 
     WeatherObj.win["root"].mainloop()
 
 
 
 if __name__ == "__main__":
-    _dict={}
-    main(_dict)
+    main()

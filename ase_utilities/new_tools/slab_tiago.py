@@ -157,15 +157,9 @@ class slab(): # My Slab definition to generate surfaces with different terminati
         b=self.cell_matrix[1]
         c=self.cell_matrix[2]
 
-        if abs(a[0]-np.linalg.norm(a)) > self.cell_threshold:
-            self.error('''Cell is not cubic. Conventional cells are often cubic but not always!
-                          If you are certain this is a conventional cell, 
-                          please use cubic_check=False option.''')
-        elif abs(b[1]-np.linalg.norm(b)) > self.cell_threshold:
-            self.error('''Cell is not cubic. Conventional cells are often cubic but not always!
-                          If you are certain this is a conventional cell, 
-                          please use cubic_check=False option.''')
-        elif abs(c[2]-np.linalg.norm(c)) > self.cell_threshold:
+        if abs(a[0]-np.linalg.norm(a)) > self.cell_threshold or \
+           abs(b[1]-np.linalg.norm(b)) > self.cell_threshold or \
+           abs(c[2]-np.linalg.norm(c)) > self.cell_threshold:
             self.error('''Cell is not cubic. Conventional cells are often cubic but not always!
                           If you are certain this is a conventional cell, 
                           please use cubic_check=False option.''')

@@ -10,7 +10,6 @@ from ase.calculators.vasp import Vasp
 import ase.calculators.vasp as vasp_calculator
 import numpy as np
 from ase.neb import NEB
-import sys
 
 def swap_atoms(atoms0,swap):
   atoms=atoms0.copy()
@@ -84,7 +83,7 @@ SCRIPT STARTS HERE
 
 '''
 
-nimages=6  # total number of images (fixed initial and final ones also count)
+nimages=12  # total number of images (fixed initial and final ones also count)
 idpp='idpp' # options are 'idpp' or ''
 run=True    # if False, it will only generate the interpolated POSCAR files
 
@@ -131,7 +130,7 @@ subprocess.call(f"echo 'computing {str(nimages)} images. {extra_string}'",shell=
 
 if run:
    atoms=read('00/POSCAR')
-   calc = vasp_calculator.Vasp(encut=600,
+   calc = vasp_calculator.Vasp(encut=400,
                         xc='PBE',
                         gga='PE',
                         ncore=8,
@@ -141,10 +140,10 @@ if run:
                         ichain=0,
                         lclimb=True,   #end NEB
                         ivdw=11,
-                        kpts  = (4,4,1),
+                        kpts  = (1,1,1),
                         gamma = True, # Gamma-centered (defaults to Monkhorst-Pack)
-                        ismear=1,
-                        sigma = 0.2,
+                        ismear=0,
+                        sigma = 0.1,
                         nelm=250,
                         algo = 'fast',
                         ibrion=1,    # -1 for no relaxation with vasp, 1 otherwise
@@ -152,8 +151,8 @@ if run:
                         ediff=1e-6,  #energy conv.
                         prec='Accurate',
                         nsw=500, # don't use the VASP internal relaxation, only use ASE
-                        lreal=False,
-                        ispin=2)
+                        lreal='Auto',
+                        ispin=1)
    atoms.set_calculator(calc)
    e=atoms.get_potential_energy()
    print('final energy',e)
